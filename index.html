@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TTM Auto-Book Test Console</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="desktop-shell">
+      <aside class="concert-panel" aria-label="Concert list">
+        <header class="panel-title">
+          <span class="music-note">&#9835;</span>
+          <strong>All Concert</strong>
+          <span class="counter">52/52</span>
+        </header>
+
+        <section class="event-grid" id="eventGrid"></section>
+      </aside>
+
+      <section class="app-window" aria-label="Auto booking test console">
+        <header class="window-bar">
+          <div class="window-name">
+            <span class="app-icon"></span>
+            <span>TTM Auto-Book Pull (Chrome)</span>
+          </div>
+          <div class="window-controls">
+            <span></span>
+            <span></span>
+            <span class="close"></span>
+          </div>
+        </header>
+
+        <div class="console-layout">
+          <section class="operator-panel">
+            <div class="brand-row">
+              <div class="brand">
+                <span class="brand-mark"></span>
+                <strong>TTM Auto-Book</strong>
+              </div>
+              <button class="tiny-button active">API</button>
+              <input class="secret-field short" type="password" value="demo-api-key-only" readonly />
+              <button class="tiny-button">Accounts</button>
+              <button class="tiny-button danger" id="accessToggle">Accs: OFF</button>
+              <span class="ready-dot"></span>
+              <span class="ready-text">READY</span>
+            </div>
+
+            <div class="tabs">
+              <button class="tab active">AllConcert</button>
+              <button class="tab">COOKIE</button>
+              <input class="secret-field" type="password" value="test-cookie-value-not-used" readonly />
+            </div>
+
+            <form class="control-form" id="controlForm">
+              <label class="field span-full">
+                <span>Event URL</span>
+                <input
+                  id="eventUrl"
+                  value="https://www.thaiticketmajor.com/concert/demo-event.html"
+                  autocomplete="off"
+                />
+              </label>
+
+              <label class="field grow">
+                <span>Date</span>
+                <input id="eventDate" value="Fri 3 Jul 2026 | 19:30" autocomplete="off" />
+              </label>
+              <button class="utility-button" type="button">นั่งชมราคา</button>
+              <button class="utility-button blue" type="button" id="loadDates">หาเวลา/โซน</button>
+
+              <label class="field zone-field">
+                <span>ZONE</span>
+                <select id="zoneSelect">
+                  <option>A1 (ว่าง 18)</option>
+                  <option>B1 (ว่าง 12)</option>
+                  <option>C2 (ว่าง 8)</option>
+                  <option>D1 (ว่าง 6)</option>
+                </select>
+              </label>
+
+              <label class="field compact">
+                <span>Delay ms</span>
+                <input id="delayInput" type="number" min="250" max="5000" step="250" value="1000" />
+              </label>
+              <label class="field compact">
+                <span>รอบ</span>
+                <input id="roundInput" type="number" min="1" max="10" value="3" />
+              </label>
+              <label class="field compact">
+                <span>จำนวน</span>
+                <input id="qtyInput" type="number" min="1" max="6" value="1" />
+              </label>
+              <label class="field compact">
+                <span>ราคา</span>
+                <input id="priceInput" value="8169" />
+              </label>
+
+              <div class="button-row span-full">
+                <button type="button" class="primary-button" id="addAccount">เพิ่มแอคเคาท์</button>
+                <button type="button" class="primary-button blue" id="fetchZones">Fetch All Zones</button>
+                <button type="button" class="primary-button amber" id="openCart">ตะกร้า</button>
+                <button type="button" class="primary-button steel" id="startQueue">เริ่มจำลอง</button>
+                <button type="button" class="primary-button purple" id="openTask">ทำงาน</button>
+                <button type="button" class="primary-button green" id="createTask">Create Task</button>
+                <button type="button" class="primary-button cyan" id="openPayment">Open Payment</button>
+              </div>
+
+              <div class="auto-pay span-full">
+                <span>Auto Pay: OFF</span>
+              </div>
+            </form>
+
+            <section class="seat-map" aria-label="Seat availability map">
+              <div class="stage-glow"></div>
+              <div class="seat-rows" id="seatRows"></div>
+            </section>
+          </section>
+
+          <aside class="monitor-panel">
+            <section class="task-panel">
+              <header class="sub-title">
+                <span class="box-icon"></span>
+                <strong>Task Manager</strong>
+              </header>
+              <div class="task-list" id="taskList">
+                <div class="empty-state">
+                  <span>ยังไม่มีงาน</span>
+                  <button type="button" id="emptyCreate">+ Create Task เพื่อจำลอง</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="log-panel">
+              <header class="sub-title">
+                <span class="box-icon blue"></span>
+                <strong>Log</strong>
+              </header>
+              <ol class="log-list" id="logList"></ol>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
